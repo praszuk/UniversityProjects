@@ -1,0 +1,20 @@
+20
+/ To jest komentarz. W powyzszej linii jest liczba wszystkich linii wejscia - dla Panstwa wygody.
+
+// To tez jest komentarz (tym razem zaczyna sie od dwoch ukosnikow; co nam szkodzi).
+// W ponizszych liniach sa wszystkie reguly przejsc dla pewnej maszyny Turinga.
+// Maszyna ta patrzy na znak na pozycji startowej, i jesli jest on zerem, kopiuje go "o 1 w lewo".
+
+START # -> STOP # right
+START 0 -> KOPIUJ 0 left
+START 1 -> STOP 1 right
+
+// W stanie KOPIUJ _musimy_ zobaczyc znak # (patrz opis zalozen w czesci "WEJSCIE")
+KOPIUJ # -> STOP 0 left
+
+// Koniec opisu maszyny. Przechodzimy do opisu przykladowych tasm wejsciowych.
+
+// Tu maszyna wykona kopiowanie
+$ 011##
+// A tu nie zmieni nic
+$ ###1#00#11

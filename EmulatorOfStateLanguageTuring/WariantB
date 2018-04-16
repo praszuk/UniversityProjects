@@ -1,0 +1,116 @@
+116
+// START
+START # -> ROZPOCZNIJ_OD_ZNAKU_PRZESUNIECIE # right
+START 0 -> PRZESUN_ZNAK_0 # left
+START 1 -> PRZESUN_ZNAK_1 # left
+
+// PRZESUNIECIE WSZYSTKIEGO W O 1 W LEWO, ZEBY OBSLUZYC
+ROZPOCZNIJ_OD_ZNAKU_PRZESUNIECIE # -> ROZPOCZNIJ_OD_ZNAKU_PRZESUNIECIE # right
+ROZPOCZNIJ_OD_ZNAKU_PRZESUNIECIE 0 -> PRZESUN_ZNAK_0 # left
+ROZPOCZNIJ_OD_ZNAKU_PRZESUNIECIE 1 -> PRZESUN_ZNAK_1 # left
+
+PRZESUN_ZNAK_0 # -> SPRAWDZ_CZY_NASTEPNY_# 0 right
+PRZESUN_ZNAK_1 # -> SPRAWDZ_CZY_NASTEPNY_# 1 right
+
+SPRAWDZ_CZY_NASTEPNY_# # -> PRZEJDZ_I_PRZESUN # right
+
+PRZEJDZ_I_PRZESUN # -> POWROT_DO_OSTATNIEGO # left
+PRZEJDZ_I_PRZESUN 0 -> PRZESUN_ZNAK_0 # left
+PRZEJDZ_I_PRZESUN 1 -> PRZESUN_ZNAK_1 # left
+
+POWROT_DO_OSTATNIEGO # -> POWROT_NA_POCZATEK # left
+
+POWROT_NA_POCZATEK 0 -> POWROT_NA_POCZATEK 0 left
+POWROT_NA_POCZATEK 1 -> POWROT_NA_POCZATEK 1 left
+POWROT_NA_POCZATEK # -> SZUKAJ_PIERWSZEGO_ZNAKU # right
+
+
+// PRZENOSZENIE - SPLIT
+SZUKAJ_PIERWSZEGO_ZNAKU # -> SZUKAJ_PIERWSZEGO_ZNAKU # right
+SZUKAJ_PIERWSZEGO_ZNAKU 0 -> PRZENIES_ZNAK_0 # left
+SZUKAJ_PIERWSZEGO_ZNAKU 1 -> PRZENIES_ZNAK_1 # left
+
+PRZENIES_ZNAK_0 # -> SPRAWDZ_CZY_TRZEBA_PRZENIESC_KOLEJNE 0 left
+PRZENIES_ZNAK_1 # -> SPRAWDZ_CZY_TRZEBA_PRZENIESC_KOLEJNE 1 left
+
+SPRAWDZ_CZY_TRZEBA_PRZENIESC_KOLEJNE # -> WRACAJ_SPRAWDZ_CZY_NASTEPNE_NIE_# # RIGHT
+SPRAWDZ_CZY_TRZEBA_PRZENIESC_KOLEJNE 0 -> PRZENIES_ZNAK_0 # left
+SPRAWDZ_CZY_TRZEBA_PRZENIESC_KOLEJNE 1 -> PRZENIES_ZNAK_1 # left
+
+WRACAJ_SPRAWDZ_CZY_NASTEPNE_NIE_# # -> ROZPOCZNIJ_KOPIOWANIE # left
+WRACAJ_SPRAWDZ_CZY_NASTEPNE_NIE_# 0 -> WRACAJ_SPRAWDZ_CZY_NASTEPNE_# 0 right
+WRACAJ_SPRAWDZ_CZY_NASTEPNE_NIE_# 1 -> WRACAJ_SPRAWDZ_CZY_NASTEPNE_# 1 right
+
+WRACAJ_SPRAWDZ_CZY_NASTEPNE_# # -> WRACAJ_SPRAWDZ_CZY_NASTEPNE_NIE_# # right
+WRACAJ_SPRAWDZ_CZY_NASTEPNE_# 0 -> PRZENIES_POPRZEDNI 0 left
+WRACAJ_SPRAWDZ_CZY_NASTEPNE_# 1 -> PRZENIES_POPRZEDNI 1 left
+
+PRZENIES_POPRZEDNI 0 -> PRZENIES_ZNAK_0 # left
+PRZENIES_POPRZEDNI 1 -> PRZENIES_ZNAK_1 # left
+
+// KOPIOWANIE
+ROZPOCZNIJ_KOPIOWANIE # -> WROC_DO_ZNAKU_I_KOPIUJ # left
+
+WROC_DO_ZNAKU_I_KOPIUJ # -> STOP # right
+WROC_DO_ZNAKU_I_KOPIUJ 0 -> KOPIUJ_0 0 left
+WROC_DO_ZNAKU_I_KOPIUJ 1 -> KOPIUJ_1 1 left
+
+KOPIUJ_0 # -> WROC_DO_ZNAKU_I_KOPIUJ 0 left
+KOPIUJ_1 # -> WROC_DO_ZNAKU_I_KOPIUJ 1 left
+
+
+$ #0110##110
+/ $ 010
+/ $ 0110#1
+
+
+// SYMULACJA:
+
+// SZUKANIE 1 ZNAKU
+/   |#|#010## // start # -> rozpocznij_od_znaku_przesuniecie # right
+/   #|#|010## // rozpocznij_od_znaku_przesuniecie # -> rozpocznij_od_znaku_przesuniecie # right
+// PRZESUNIECIE CALEGO WYRAZU O 1 W LEWO
+/   ##|0|10## // rozpocznij_od_znaku_przesuniecie 0 -> przesun_znak_0 # left
+/   #|0|#10## // przesun_znak_0 0 -> sprawdz_czy_nastepny_# 0 right
+/   #0|#|10## // sprawdz_czy_nastepny_# # -> przejdz_i_przesun # right
+/   #0#|1|0## // przejdz_i_przesun 1 -> przesun_znak_1 # left
+/   #0|1|#0## // przesun_znak_1 1-> sprawdz_czy_nastepny_# 1 right
+/   #01|#|0## // sprawdz_czy_nastepny_# # -> przejdz_i_przesun # right
+/   #01#|0|## // przejdz_i_przesun 0 -> przesun_znak_0 # left
+/   #01|0|### // przesun_znak_0 0 -> sprawdz_czy_nastepny_# 0 right
+/   #010|#|## // sprawdz_czy_nastepny_# # -> przejdz_i_przesun # right
+/   #010#|#|# // przejdz_i_przesun # -> powrot_do_ostatniego # left
+/   #010|#|## // powrot_do_ostatniego # -> powrot_na_poczatek # left
+/   #01|0|### // powrot_na_poczatek 0 -> powrot_na_poczatek 0 left
+/   #0|1|0### // powrot_na_poczatek 1 -> powrot_na_poczatek 1 left
+/   #|0|10### // powrot_na_poczatek 0 -> powrot_na_poczatek 0 left
+/   |#|010### // powrot_na_poczatek # -> szukaj_pierwszego_znaku # right
+//  SPLITOWANIE ZNAKU
+/   ##|0|10## // szukaj_pierwszego_znaku 0 -> przenies_znak_0 # left
+/   #|0|#10## // przenies_znak_0 # -> sprawdz_czy_trzeba_przeniesc_kolejne 0 left
+/   |#|0#10## // sprawdz_czy_trzeba_przeniesc_kolejne # -> wracaj_sprawdz_czy_nastepne_nie_# # right
+/   #|0|#10## // wracaj_sprawdz_czy_nastepne_nie_# 0 -> wracaj_sprawdz_czy_nastepne_# 0 right
+/   #0|#|10## // wracaj_sprawdz_czy_nastepne_# # -> wracaj_sprawdz_czy_nastepne_nie_# # right
+/   #0#|1|0## // wracaj_sprawdz_czy_nastepne_nie_# 1 -> wracaj_sprawdz_czy_nastepne_# 1 right
+/   #0#1|0|## // wracaj_sprawdz_czy_nastepne_# 0 -> przenies_poprzedni 0 left
+/   #0#|1|0## // przenies_poprzedni 1 -> przenies_znak_1 # left
+/   #0|1|#0## // przenies_znak_1 # -> sprawdz_czy_trzeba_przeniesc_kolejne 1 left
+/   #|0|1#0## // sprawdz_czy_trzeba_przeniesc_kolejne 0 -> przenies_znak_0 # left
+/   |0|#1#0## // przenies_znak_0 # -> sprawdz_czy_trzeba_przeniesc_kolejne 0 left
+/  |#|0#1#0## // sprawdz_czy_trzeba_przeniesc_kolejne # -> wracaj_sprawdz_czy_nastepne_nie_# # right
+/  #|0|#1#0## // wracaj_sprawdz_czy_nastepne_nie_# 0 -> wracaj_sprawdz_czy_nastepne_# 0 right
+/  #0|#|1#0## // wracaj_sprawdz_czy_nastepne_# # -> wracaj_sprawdz_czy_nastepne_nie_# # right
+/  #0#|1|#0## // wracaj_sprawdz_czy_nastepne_nie_# 1 -> wracaj_sprawdz_czy_nastepne_# 1 right
+/  #0#1|#|0## // wracaj_sprawdz_czy_nastepne_# # -> wracaj_sprawdz_czy_nastepne_nie_# # right
+/  #0#1#|0|## // wracaj_sprawdz_czy_nastepne_nie_# 0 -> wracaj_sprawdz_czy_nastepne_# 0 right
+/  #0#1#0|#|# // wracaj_sprawdz_czy_nastepne_# # -> wracaj_sprawdz_czy_nastepne_nie_# # right
+/  #0#1#0#|#| // wracaj_sprawdz_czy_nastepne_nie_# # -> rozpocznij_kopiowanie # left
+// KOPIOWANIE
+/  #0#1#0|#|# // rozpocznij_kopiowanie # -> wroc_do_znaku_i_kopiuj # left
+/  #0#1#|0|## // wroc_do_znaku_i_kopiuj 0 -> kopiuj_0 0 left
+/  #0#1|#|0## // kopiuj_0 # -> wroc_do_znaku_i_kopiuj 0 left
+/  #0#|1|00## // wroc_do_znaku_i_kopiuj 1 -> kopiuj_1 1 left
+/  #0|#|100## // kopiuj_1 # -> wroc_do_znaku_i_kopiuj 1 left
+/  #|0|1100## // wroc_do_znaku_i_kopiuj 0 -> kopiuj_0 0 left
+/  |#|01100## // kopiuj_0 # -> wroc_do_znaku_i_kopiuj 0 left
+/ |#|001100## // wroc_do_znaku_i_kopiuj # -> STOP # right

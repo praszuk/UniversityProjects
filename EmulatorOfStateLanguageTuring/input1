@@ -1,0 +1,26 @@
+26
+// poczatek dzialania maszyny
+START # -> A # right
+START 0 -> A 0 right
+START 1 -> B 1 right
+
+A # -> A # right
+A 0 -> A 0 right
+A 1 -> B 1 right
+
+B # -> C 1 right
+B 0 -> C 1 right
+B 1 -> B 1 right
+
+// zakonczenie dzialania maszyny
+C # -> STOP # right
+C 0 -> STOP 0 right
+C 1 -> STOP 1 right
+
+// PRZYKLADOWE POCZATKOWE ZAWARTOSCI TASMY
+// oczekiwany wynik: 00##1111
+$ ###00##111#
+// oczekiwany wynik: 001110##1
+$ ###001100##1#
+// oczekiwany wynik: 11111
+$ ###11011#

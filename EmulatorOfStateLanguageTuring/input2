@@ -1,0 +1,46 @@
+46
+// poczatek dzialania maszyny
+START # -> R # right
+START 0 -> RZ # right
+START 1 -> RO # right
+
+R # -> R # right
+R 0 -> RZ # right
+R 1 -> RO # right
+
+RZ # -> CZ # left
+RZ 0 -> RZ 0 right
+RZ 1 -> RZ 1 right
+
+RO # -> CO # left
+RO 0 -> RO 0 right
+RO 1 -> RO 1 right
+
+// zakonczenie dzialania maszyny, ciag jest palindromem nieparzystej dlugosci
+CZ # -> STOP # left
+CZ 0 -> TMP # left
+// zakonczenie dzialania maszyny, ciag nie jest palindromem
+CZ 1 -> STOP 1 left
+
+// zakonczenie dzialania maszyny, ciag jest palindromem nieparzystej dlugosci
+CO # -> STOP # left
+// zakonczenie dzialania maszyny, ciag nie jest palindromem
+CO 0 -> STOP 0 left
+CO 1 -> TMP # left
+
+// zakonczenie dzialania maszyny, ciag jest palindromem parzystej dlugosci
+TMP # -> STOP # left
+TMP 0 -> L 0 left
+TMP 1 -> L 1 left
+
+L # -> R # right
+L 0 -> L 0 left
+L 1 -> L 1 left
+
+// PRZYKLADOWE POCZATKOWE ZAWARTOSCI TASMY
+// oczekiwany wynik: 10
+$ ###1##10#
+// oczekiwany wynik: 10
+$ ##0110##10#
+// oczekiwany wynik: 11100#0
+$ ##111100#0#
