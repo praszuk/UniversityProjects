@@ -13,5 +13,5 @@ _Each project has only a few commits. I try to upload only final version on gith
 4th semester:
  - NAI (Artificial Intelligence tools):
  	 - [Perceptron](Perceptron) - program, which generates random points in a specific range, computes NET and "y" and shows on plots data using 2 activation neural function. More info [Task(PL).jpg](Perceptron/Task(PL).jpg)
- 
+ 	 - [SuperVisedLearning](SuperVised_Learning) - program, which is implementation for Super Vised Learning for 1 layer network. More info [Task(PL).jpg](SuperVised_Learning/Task(PL).jpg).
  
