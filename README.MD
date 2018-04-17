@@ -9,3 +9,9 @@ _Each project has only a few commits. I try to upload only final version on gith
  - TAK (Computer techniques and architecture):
  	 - [EmulatorOfStateLanguageTuring](EmulatorOfStateLanguageTuring) - program, which emulates [Turing's machine](https://en.wikipedia.org/wiki/Turing_machine) and allows for input own code and execute it. More info [Task(PL).pdf](EmulatorOfStateLanguageTuring/Task(PL).pdf)
  	 - [Parser: Python -> TCL](ParserPython_AssemblerTCL) - program, which parse simple python operations like addition, substraction etc. to TCL language, which is like an Assembler, created for this subject. More info [Task(PL).jpg](ParserPython_AssemblerTCL/Task(PL).jpg).
+
+4th semester:
+ - NAI (Artificial Intelligence tools):
+ 	 - [Perceptron](Perceptron) - program, which generates random points in a specific range, computes NET and "y" and shows on plots data using 2 activation neural function. More info [Task(PL).jpg](Perceptron/Task(PL).jpg)
+ 
+ 
